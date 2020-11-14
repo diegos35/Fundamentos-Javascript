@@ -29,9 +29,11 @@ const Mayoria_Edad = 18;
 //esto es lo mismo que arriba Arrow Function MAS ABREVIADO SIN () Y {}
                                 //ESTO ES LO QUE RETORNA
 //destructuramos el Objeto que pasamos por Param
-const esMayorEdad = ({ edad }) => edad >= Mayoria_Edad ; 
+const esMayorEdad = ({ edad  }) => edad >= Mayoria_Edad ; 
 
-
+/**
+ * @param persona
+ */
 function imprimirSiEsMayorEdad(persona){
     if  (persona.edad > 18)  {
         //console.log(`${persona.nombre} es mayor de edad`)//Comillas invertidad para interpolar la var
@@ -40,5 +42,17 @@ function imprimirSiEsMayorEdad(persona){
         }
     } else {
         console.log(`${persona.nombre} es menor de edad`)
+    }
+}
+
+/**
+ * @param persona
+ */
+
+function permitirAcceso(persona){
+    if (!esMayorEdad(persona)){
+        console.log('ACCESO DENEGADO');
+    } else {
+        console.log('ACCESO PERMITIDO')
     }
 }
