@@ -28,10 +28,8 @@ const Mayoria_Edad = 18;
 //3  FORMA
 //esto es lo mismo que arriba Arrow Function MAS ABREVIADO SIN () Y {}
                                 //ESTO ES LO QUE RETORNA
-const esMayorEdad = persona => persona.edad >= Mayoria_Edad ; 
-
-
-
+//destructuramos el Objeto que pasamos por Param
+const esMayorEdad = ({ edad }) => edad >= Mayoria_Edad ; 
 
 
 function imprimirSiEsMayorEdad(persona){
