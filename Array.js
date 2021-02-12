@@ -35,6 +35,7 @@ var paula = {
 }
 
 const esAlta = persona => persona.altura > 1.8
+
 //Es lo mismo de arriba
 const esAlta = ({altura}) => altura > 1.8
 

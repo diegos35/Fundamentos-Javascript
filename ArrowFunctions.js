@@ -15,14 +15,14 @@ const Mayoria_Edad = 18;
 
 //1 Forma
 //variable se le asigna la Funcion Anonima
-// const esMayorEdad = function(persona){
-//     return persona.edad >= Mayoria_Edad 
-// }
+const esMayorEdad = function(persona){
+    return persona.edad >= Mayoria_Edad 
+}
 
 //2 Forma Otra Forma ARROW FUNCTION sin () ----------
-// const esMayorEdad = persona => { //Cuando hay 1 solo param se le puede quitar los parentesis ()
-//     return persona.edad >= Mayoria_Edad 
-// }
+const esMayorEdad = persona => { //Cuando hay 1 solo param se le puede quitar los parentesis ()
+    return persona.edad >= Mayoria_Edad 
+}
 
 
 //3  FORMA

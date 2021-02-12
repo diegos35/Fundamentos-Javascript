@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Clase1 - variables</title>
+</head>
+<body>
+    <script>
+        
+        // console.log('a');
+        // setTimeout(() => console.log('b'),0)//este metodo es el ultimo que aparece es un callback
+        // console.log('c');
+
+        //other example
+        // setTimeout(() => console.log('d'),2000)
+        // for (let index = 0; index < 10000000000; index++) {
+        // }
+
+        //callBack
+        function callback(){
+            console.log('hola soy un callback');
+        }
+
+        function mensaje (fn){ //como parametro recibe una funcion
+            fn();
+        } 
+
+        mensaje(callback); //lamamos a la funcion
+        
+
+    </script>
+</body>
+</html>
