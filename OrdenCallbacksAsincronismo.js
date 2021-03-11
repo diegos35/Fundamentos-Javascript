@@ -6,22 +6,49 @@ const opts = {crossDomain: true}
 function obtnerPersonaje(id, callback){
     console.log(id)
     const url = `${API_URL}${PEOPLE_URL.replace(':id', id )}`
-    $.get(url, opts, function({result}){
-        console.log(`Hola yo soy ${result.properties.name}`)
+    
+    $
+    .get(url, opts, callback)
+    .fail(function () {
+        console.log('sucedio un error no se pudo obtner el personaje ${id}')
     })
-    if(callback){ //llamamos al callback que es la funcion anonima
-    callback()
-    } 
+    /**como Arrow Funtion */
+    // $
+    // .get(url, opts, callback)
+    // .fail(() => {
+    //     console.log('sucedio un error no se pudo obtner el personaje ${id}')
+    // })
 }
 
 
-obtnerPersonaje(1, function() { 
+
+/**
+ * le pasamos 2 parametro el id que quermos obtener
+ * y el Callback
+*/
+
+obtnerPersonaje(1, function({result}) { 
+
+    console.log(`Hola yo soy ${result.properties.name}`);
+
     obtnerPersonaje(2, function(){
+        console.log(`Hola yo soy ${result.properties.name}`);
+
         obtnerPersonaje(3, function() {
+            console.log(`Hola yo soy ${result.properties.name}`);
+
             obtnerPersonaje(4, function(){
+                console.log(`Hola yo soy ${result.properties.name}`);
+                
                 obtnerPersonaje(5, function () {
+                    console.log(`Hola yo soy ${result.properties.name}`);
+
                     obtnerPersonaje(6, function () {
-                        obtnerPersonaje(7)
+                        console.log(`Hola yo soy ${result.properties.name}`);
+                        
+                        obtnerPersonaje(7, function () {
+                            console.log(`Hola yo soy ${result.properties.name}`);
+                        })
                     })
                 })
             })
