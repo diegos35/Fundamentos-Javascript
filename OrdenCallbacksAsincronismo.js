@@ -4,67 +4,49 @@ const opts = {crossDomain: true}
 
 
 function obtnerPersonaje (id) {
-  return new Promise((resolve, reject) => {
-    const url = `${API_URL}${PEOPLE_URL.replace(":id", id)}`
-    $.get(url, opts, function(data) {
-      console.log(data)
-        resolve(data)
-        })
-       .fail(() => reject(id))
-  });
-}
-var ids = [1,2,3,4,5,6,7]
 
+   //cracion de la promesa
+   return new Promise((resolve, reject) => {
+    
+      const url = `${API_URL}${PEOPLE_URL.replace(":id", id)}`
+         $
+            .get(url, opts, function(data) {
+            //console.log(data)
+            resolve(data) //cuando se resuelve Fullfilled
+            })
+            .fail(() => reject(id)) //cuando es Reject
+  });
+
+}
+
+/**Función de error */
 function onError(id) {
   console.log(`sucedio un error al obterner personaje ${id}`)
 }
 
+//colocamos el async antes de la función
+async function obtenerPersonases() {
+   var ids = [1,2,3,4,5,6,7] //ids de los personajes
+   var promesas = ids.map( id =>  obtnerPersonaje(id) ) //mapea las promesas en un array
+   
+   try {
+      var personajes = await Promise.allSettled(promesas) //se detiene hasta que todas las promesas sean resueltas y se guarda en la variable
+      console.log(personajes) //se resuelven todas las promesas al mismo tiempo 
+   } catch (id) {
 
-var promesas = ids.map( id =>  obtnerPersonaje(id) )
+      onError(id)
+   }
 
-Promise
-  //.all(promesas) //le pasamos el parámetro
-  .allSettled(promesas) //pasamos el array de promesas metodo me devuelve un array de las promesas Resolve y Reject
-  .then( personajes => console.log(personajes) )
-  .catch(onError)
-/*var promesas = ids.map(function (id) {
-    return obtnerPersonaje(id);
-})
-*/
-
+   /*
+   Promise
+   .all(promesas) //le pasamos el parámetro
+   //.allSettled(promesas) //pasamos el array de promesas metodo me devuelve un array de las promesas Resolve y Reject
+   .then( personajes => console.log(personajes) )
+   .catch(onError)
+   */
 
 
+}
 
-// obtnerPersonaje(1)
-//     .then( personaje1 => { //arrow function
-//         console.log(`el persona 1 es ${personaje1.result.properties.name}`)
-//         return obtnerPersonaje(2)
-//     })
-//     .then( personaje2 => {
-//       console.log(`el persona 2 es ${personaje2.result.properties.name}`)
-//       return obtnerPersonaje(3)
-//     })
-//     .then( personaje3 => {
-//       console.log(`el persona 3 es ${personaje3.result.properties.name}`)
-//       return obtnerPersonaje(5)
-//     })
-//     .then( personaje4 => {
-//       console.log(`el persona 4 es ${personaje4.result.properties.name}`)
-//       return obtnerPersonaje(5)
-//     })
-//     .then( personaje4 => {
-//       console.log(`el persona 5 es ${personaje4.result.properties.name}`)
-//       return obtnerPersonaje(6)
-//     })
-//     .catch(onError)
-    
-    /**
-     .then(function (result) { 
-        console.log(`el persona 1 es ${result.properties.name}`)
-    })
-     */
-    // .catch(function (id) {
-    //     onError(id)
-    // } )
-
+obtenerPersonases()
 
