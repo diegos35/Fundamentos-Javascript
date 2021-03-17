@@ -152,7 +152,8 @@
              iluminarSecuencia(){
               for (let i = 0; i < this.nivel; i++) {
                 //var color = this.trasnformarNumeroAColor(this.secuencia[i])
-                let color = this.trasnformarNumeroAColor(this.secuencia[i])
+                const color = this.trasnformarNumeroAColor(this.secuencia[i])
+                //let color = this.trasnformarNumeroAColor(this.secuencia[i])
                 //console.log('1',color)
                  setTimeout(()=>this.iluminarColor(color),1000*i)
                 
