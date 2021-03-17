@@ -95,86 +95,139 @@
     <script>
         
         const celeste = document.getElementById('celeste')
-        const violeta = document.getElementById('violeta')
-        const naranja = document.getElementById('naranja')
-        const verde = document.getElementById('verde')
-        const btnEmpezar = document.getElementById('btnEmpezar')
+const violeta = document.getElementById('violeta')
+const naranja = document.getElementById('naranja')
+const verde = document.getElementById('verde')
+const btnEmpezar=document.getElementById('btnEmpezar')
+const ULTIMO_NIVEL = 10; 
 
-        class Juego {
-            constructor() { //inicializar los metodos
-                this.inicializar()
-                this.generarSecuencia()
-                this.siguienteNIvel()
-            }
+class Juego{
+    constructor(){
+        this.inicializar()
+        this.generarSecuencia()
+        setTimeout(this.siguienteNivel, 500)
+    } 
+    inicializar(){  
+        this.siguienteNivel = this.siguienteNivel.bind(this )   
+        this.elegirColor = this.elegirColor.bind(this) 
+        
+        btnEmpezar.classList.add('hide')
+        this.nivel = 1 
+        this.colores = {
+            celeste, 
+            violeta,
+            naranja,
+            verde
+        }    
+    }  
 
-            inicializar() {
-                
-                btnEmpezar.classList.add('hide')
-                //console.log(btnEmpezar.classList)
-                this.nivel = 1
-                /*Guardamos los colore un objecto, los botones */
-                this.colores = {
-                  //celeste: celeste nos ahorramos esto 
-                  celeste,
-                  violeta, 
-                  naranja, 
-                  verde
+    generarSecuencia(){
+        this.secuencia = new Array(ULTIMO_NIVEL).fill(0).map(n => Math.floor(Math.random()*4))
+    }
+
+    siguienteNivel(){
+        //inicializando el subnivel
+        this.subnivel= 0
+        this.iluminarSecuencia()
+        this.agregarEventosClick()
+    }
+
+    transformarNumeroAColor(numero){
+        switch (numero){
+            case 0: 
+                return 'celeste';
+            case 1:
+                return 'violeta';
+            case 2:
+                return 'naranja';
+            case 3:
+                return 'verde';
+        }
+    }
+
+    transformarColorANumero(numero){
+        switch (numero){
+            case 'celeste': 
+                return 0;
+            case 'violeta':
+                return 1;
+            case 'naranja':
+                return 2;
+            case 'verde':
+                return 3;
+        }
+    }
+
+    iluminarSecuencia(){
+        /*aplicamos i < this.nivel porque el numero del nivel 
+		corresponde al numero de elementos que le usuario 
+        modificara y tendra que seguir */
+        
+        for (let i = 0; i < this.nivel; i++){
+            const color = this.transformarNumeroAColor(this.secuencia[i]) 
+            // Ej: const color = "verde"
+
+            setTimeout(() => this.iluminarColor(color), 1000*i)
+			//colocar x * i nos permite acumular tiempo en función del for
+
+        }
+    }
+
+    iluminarColor(color){
+		//Colocando la clase que ilumina el color
+        this.colores[color].classList.add('light')
+        setTimeout(() => this.apagarColor(color), 350)
+    }
+
+    apagarColor(color){
+		//Quitando la clase que ilumina el color
+        this.colores[color].classList.remove('light')
+    }
+
+    agregarEventosClick(){
+		//para obtener el input agregando un manejador de eventos (click)
+        this.colores.celeste.addEventListener('click', this.elegirColor)
+        this.colores.verde.addEventListener('click', this.elegirColor)
+        this.colores.violeta.addEventListener('click', this.elegirColor)
+        this.colores.naranja.addEventListener('click', this.elegirColor)
+    }
+
+    eliminarEventosClick(){
+        //para remover el input agregado al manejador de eventos (click)
+        this.colores.celeste.removeEventListener('click', this.elegirColor)
+        this.colores.verde.removeEventListener('click', this.elegirColor)
+        this.colores.violeta.removeEventListener('click', this.elegirColor)
+        this.colores.naranja.removeEventListener('click', this.elegirColor)
+    }
+    
+    //los metodos que se llaman en el event listener suelen tener en la funcion un parametro ev
+    
+    elegirColor(ev){ //le asignamos su target dataset // un evento (ev)
+        const nombreColor = ev.target.dataset.color
+        // daset almacena valores 
+
+        const numeroColor = this.transformarColorANumero(nombreColor)
+        this.iluminarColor(nombreColor)
+        // algoritmo d la funcion del juego
+        if (numeroColor === this.secuencia[this.subnivel]){
+            this.subnivel++
+            if (this.subnivel === this.nivel){
+                this.nivel++
+                this.eliminarEventosClick()
+                if(this.nivel === (ULTIMO_NIVEL + 1)){
+                    //gano
+                } else {
+                    setTimeout(this.siguienteNivel, 1500)
                 }
             }
-            //genera numero aleatoria del 0 al 3
-            generarSecuencia(){
-              this.secuencia =  new Array(10).fill(0).map(n => Math.floor(Math.random()*4))
-            }
-
-            
-            siguienteNIvel(){
-              this.iluminarSecuencia()
-            }
-            
-
-            //transforma el numero a un  color
-            trasnformarNumeroAColor(numero){
-              switch (numero) {
-                case 0:
-                  return 'celeste'
-                case 1:
-                  return 'violeta'
-                case 2:
-                  return 'naranja'
-                case 3:
-                  return 'verde'
-              }
-            }
-            
-            /**recorre los 10 numeros del array para trasformalo
-             en un color con la funcion trasnformar
-            */
-             iluminarSecuencia(){
-              for (let i = 0; i < this.nivel; i++) {
-                //var color = this.trasnformarNumeroAColor(this.secuencia[i])
-                const color = this.trasnformarNumeroAColor(this.secuencia[i])
-                //let color = this.trasnformarNumeroAColor(this.secuencia[i])
-                //console.log('1',color)
-                 setTimeout(()=>this.iluminarColor(color),1000*i)
-                
-              }
-            }
-
-            iluminarColor(color){
-              this.colores[color].classList.add('light') //agrega la clase que esta en css
-              setTimeout(() => this.apagarColor(color),350)
-            }
-
-            apagarColor(color){
-              this.colores[color].classList.remove('light') 
-            }
-
+        } else {
+            //perdio
         }
-
-
-        function empezarJuego() {
-            window.juego = new Juego()
-        }
+    }
+}    
+function empezarJuego(){    
+    window.juego = new Juego()
+}
         
     </script>
   </body>
