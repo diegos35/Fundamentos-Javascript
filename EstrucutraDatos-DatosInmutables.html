@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const diego = {
+            nombre: 'diego',
+            apellido: 'caviedes',
+            edad: 24
+        }
+
+        /*recibe como parametro una persona*/
+        //const cumpleaños = persona => persona.edad++ 
+
+        /*const cumpleañosInmutable = persona => ({
+            ...persona,
+            edad: persona.edad + 1
+        })*/
+        
+
+        /*
+        *Una truco que puedes usar para copiar objetos y 
+        sean inmutables sin importa que hayan objetos nested es primero hacerle un
+         JSON.parse(JSON.stringify(objeto)) a el objeto que quieras copiar.
+        */
+
+        const cumpleañosInmutable = persona => {
+            persona = JSON.parse(JSON.stringify(persona))
+            return {
+                ...persona,
+                edad: persona.edad + 1
+            }
+        }
+
+    </script>
+</body>
+</html>
