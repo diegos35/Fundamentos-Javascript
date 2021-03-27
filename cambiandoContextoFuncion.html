@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const diego = {
+            nombre: 'diego',
+            apellido: 'caviedes'
+        }
+        
+        const yesica = {
+            nombre: 'yesica',
+            apellido: 'cortes'
+        }
+
+        // function saludar(){
+        //     console.log(`Hola mi nombre es ${this.nombre}`)
+        // }
+        
+        function saludar(saludo = 'Hola') {
+	        console.log(`${saludo}, mi nombre es ${this.nombre}`)
+        }
+
+        //cambiar el THIS de una funcion
+
+        // const saludarDiego = saludar.bind(diego)
+        // const saludarYesica = saludar.bind(yesica)
+        
+        /**  CALL**/
+        //saludar.call(diego)
+        //saludar.call(diego, 'Hola che')
+        
+        /**APPLY**/
+        //@param  quien va a ser el THIS 
+        //@param  array parametros de la funcion
+        saludar.apply(diego, ['hola che'])
+
+
+    </script>
+</body>
+</html>
