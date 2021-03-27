@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var diego = {
+            nombre:'diego',
+            apellido:'caviedes',
+            edad:28
+        }
+        function esMayorEdad(persona){
+            var mensaje
+            if (persona.edad > 18){
+                 mensaje = 'es mayor de edad'
+            }else{
+                 mensaje = 'es menor de edad'
+            }
+            console.log(mensaje)
+         }
+         //Let reduce el alcance de la variable
+        //esMayorEdad(diego)
+         for (let i = 0; i < 10; i++) {
+            console.log(i)
+         }
+         console.log(`Termino el for el valor de i es ${i}`)
+    </script>
+</body>
+</html>
